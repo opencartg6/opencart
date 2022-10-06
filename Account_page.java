@@ -5,6 +5,8 @@ import java.io.IOException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -13,6 +15,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -64,26 +67,37 @@ public class Account_page {
 			Thread.sleep(5000);
 			//driver.findElement(account).click();
 			driver.findElement(cp).click();
+			Thread.sleep(2000);
 			driver.findElement(op).sendKeys(op1);
+			Thread.sleep(1000);
 			driver.findElement(np).sendKeys(np1);
+			Thread.sleep(1000);
 			driver.findElement(npc).sendKeys(npc1);
+			Thread.sleep(1000);
 			driver.findElement(cont).click();
+			Thread.sleep(2000);
 		}
 		public void accDetails(String username,String f_name,String l_name,String comp) throws InterruptedException, IOException {
 			
 			//driver.findElement(accDetail).click();
 			driver.findElement(name).clear();
 			driver.findElement(name).sendKeys(username);
+			Thread.sleep(1000);
 			driver.findElement(fname).clear();
 			driver.findElement(fname).sendKeys(f_name);
+			Thread.sleep(1000);
 			driver.findElement(lname).clear();
 			driver.findElement(lname).sendKeys(l_name);
+			Thread.sleep(1000);
 			driver.findElement(company).clear();
 			driver.findElement(company).sendKeys(comp);
+			Thread.sleep(1000);
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("window.scrollBy(0,500)", "");
+			Thread.sleep(1000);
 			Select drpCountry = new Select(driver.findElement(country));
 			drpCountry.selectByVisibleText("France");
+			Thread.sleep(1000);
 			
 		}
 		public void profile_valid() throws InterruptedException, IOException {
@@ -108,6 +122,7 @@ public class Account_page {
 			Thread.sleep(20000);
 			js.executeScript("window.scrollBy(0,250)", "");
 			driver.findElement(submit).click();
+			Thread.sleep(2000);
 		}
 		
 		/*public void profile_clear() throws InterruptedException {
@@ -163,5 +178,15 @@ public class Account_page {
 			driver.findElement(submit).click();
 			Thread.sleep(20000);
 		}
+		public void takeSnapShot(WebDriver webdriver,String fileWithPath) throws Exception{
+    		//Convert web driver object to TakeScreenshot
+    		TakesScreenshot scrShot =((TakesScreenshot)webdriver);
+    		//Call getScreenshotAs method to create image file
+    		File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
+    		//Move image file to new destination
+    		File DestFile=new File(fileWithPath);
+    		//Copy file at destination
+    		FileUtils.copyFile(SrcFile, DestFile);
+    		}
 		
 }

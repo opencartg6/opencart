@@ -9,7 +9,7 @@ public class Login_page {
 	By password = By.id("input-password");
 	By loginButton = By.xpath("//body/div[@id='account-login']/div[2]/div[1]/div[1]/form[1]/div[3]/div[1]/button[1]");
 	By pin = By.id("input-pin");
-	
+	By logoutButton = By.linkText("Logout");
 	public Login_page(WebDriver driver) {
 			 this.driver = driver;
 		 }
@@ -35,6 +35,9 @@ public class Login_page {
 		}
 		public void clickLoginButton() {
 			driver.findElement(loginButton).click();
+		}
+		public void logout() {
+			driver.findElement(logoutButton).click();
 		}
 		
 
